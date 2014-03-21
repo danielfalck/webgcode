@@ -37,8 +37,13 @@ var GROUPS_TRANSITIONS = {
     20: {unitMode: inchesConverter},
     21: {unitMode: mmConverter},
     40: {},//skip
+    41: {},//skip
+    42: {},//skip
+    43: {},//skip
     49: {},//skip
     54: {},//skip
+    55: {},//skip
+    56: {},//skip
     61: {pathControl: 61},
     61.1: {pathControl: 61.1},
     64: {pathControl: 64},
@@ -228,7 +233,8 @@ function createParser() {
     var jp = jsparse;
     var memory = {};
     var number = jp.join_action(jp.repeat1(jp.range('0', '9')), '');
-    var decimalPart = jp.join_action(jp.sequence('.', number), '');
+    var decimalPart = jp.join_action(jp.sequence('.', jp.optional(number)), '');
+    // Dan Falck added and 'jp.optional()' around previous 'number' to catch examples like 'X 1. ' 
     var integerAndDecimal = jp.action(jp.sequence(number, jp.optional(decimalPart)), function (ast) {
         return ast[1] !== false ? ast[0] + ast[1] : ast[0];
     });
@@ -353,7 +359,8 @@ function createParser() {
     var affectation = jp.action(jp.wsequence(parameter, jp.expect('='), readExpression), function (ast) {
         return {variable: ast[0], value: ast[1]};
     });
-    var word = jp.wsequence(jp.choice.apply(null, 'FGIJLMPRSTXYZfgijlmrpstxyz'.split('')), readExpression);
+    var word = jp.wsequence(jp.choice.apply(null, 'FGHIJLMPRSTXYZfghijlmrpstxyz'.split('')), readExpression);
+    //Dan Falck added 'H' and 'h' since they are heigth offsets
     var line = jp.action(jp.wsequence(jp.repeat0(jp.choice(affectation, word)), jp.end), function (ast) {
         var res = {};
         var affectations = [];
@@ -421,11 +428,26 @@ function evaluate(text, position) {
         }
         machineState.motionMode(parsed, machineState);
     });
+    for (var i = 0;i<machineState.path.length;i++)
+    {
+        console.log(machineState.path[i]);
+        console.log(machineState.path[i].type);
+        console.log("from:X", machineState.path[i].from.x,"Y",machineState.path[i].from.y,"Z",machineState.path[i].from.z);
+
+        console.log("to:X", machineState.path[i].to.x,"Y",machineState.path[i].to.y,"Z",machineState.path[i].to.z);
+        if (machineState.path[i].type == "arc")
+            
+        console.log("center:X", machineState.path[i].center.first,"Y",machineState.path[i].center.second);
+
+
+    }
     return machineState.path;
 }
 
 function evaluateCode() {
     var text = $('#codebox').val();
     var simulatedPath = simulate(evaluate(text));
-    displayPath(simulatedPath, '0 0 0', 'toolpath');
+    console.log(evaluate(text));
+    displayPath(simulatedPath, '201 1 0', 'toolpath');
+    //console.log(simulatedPath);
 }

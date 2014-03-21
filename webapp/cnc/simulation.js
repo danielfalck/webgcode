@@ -77,14 +77,14 @@ function displayPath(path, color, id) {
     lineGeometry.verticesNeedUpdate = true;
     if (window.toolpath)
         scene.remove(window.toolpath);
-    window.toolpath = new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({color: 0xCCCCCC}));
+    window.toolpath = new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({color: 0xcccccc}));
     scene.add(window.toolpath);
     renderer.render(scene, camera);
 }
 
-function displayVector(origin, vector, color, id) {
-    displayPath([origin, {x: origin.x + vector.x, y: origin.y + vector.y, z: origin.z + vector.z}], color, id);
-}
+//function displayVector(origin, vector, color, id) {
+ //   displayPath([origin, {x: origin.x + vector.x, y: origin.y + vector.y, z: origin.z + vector.z}], color, id);
+//}
 
 function arcClampedSpeed(radius, speed, acceleration) {
     var maxRadialAcceleration = Math.pow(speed, 2) / radius;
@@ -335,9 +335,9 @@ function simulate(path) {
     }
 
     simulate2(path, pushPoint);
-    var chart1 = $.plot("#chart1", posData);
-    $.plot("#chart2", speedData, {xaxis: {max: chart1.getAxes().xaxis.max}});
-    $.plot("#chart3", accelerationData, {xaxis: {max: chart1.getAxes().xaxis.max}});
+    //var chart1 = $.plot("#chart1", posData);
+    //$.plot("#chart2", speedData, {xaxis: {max: chart1.getAxes().xaxis.max}});
+    //$.plot("#chart3", accelerationData, {xaxis: {max: chart1.getAxes().xaxis.max}});
     return simulatedPath;
 }
 
