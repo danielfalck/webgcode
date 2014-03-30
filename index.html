@@ -95,9 +95,9 @@ G0 X1.0
 //var camera = new THREE.OrthographicCamera( WIDTH/ - 2, WIDTH/ 2, HEIGHT/ 2, HEIGHT/ - 2, 0.1, 20000 );
     var scene = new THREE.Scene();
     camera.useQuaternion == true
-    camera.position.x = 150;
-    camera.position.y = -150;
-    camera.position.z = 150;
+    camera.position.x = 200;
+    camera.position.y = -200;
+    camera.position.z = 200;
     camera.up.set(0, 0, 1);
     renderer.setSize(WIDTH, HEIGHT);
     $(window).resize(function () {
@@ -177,8 +177,8 @@ function backplot(){
 
         camera.position.x = 0;
         camera.position.y = 0;
-        camera.position.z = 150;
-        camera.up.set(0, 1, 1);
+        camera.position.z = 300;
+        camera.up.set(0, 1, 0);
         zoom=15;
     }
 </script>
@@ -188,7 +188,7 @@ function backplot(){
     {
         var viewtype=2;
         camera.position.x = 0;
-        camera.position.y = 150;
+        camera.position.y = 300;
         camera.position.z = 0;
         camera.up.set(1, 0, 0);
         zoom=15;
@@ -198,9 +198,9 @@ function backplot(){
     function ISOView()
     {
         var viewtype=3;
-        camera.position.x = 150;
-        camera.position.y = -150;
-        camera.position.z = 150;
+        camera.position.x = 200;
+        camera.position.y = -200;
+        camera.position.z = 200;
         camera.up.set(0, 0, 1);
         zoom=15;
     }
