@@ -77,7 +77,7 @@ function displayPath(path, color, id) {
     lineGeometry.verticesNeedUpdate = true;
     if (window.toolpath)
         scene.remove(window.toolpath);
-    window.toolpath = new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({color: 0xcccccc}));
+    window.toolpath = new THREE.Line(lineGeometry, new THREE.LineBasicMaterial({color: 0xff00ff}));
     scene.add(window.toolpath);
     renderer.render(scene, camera);
 }

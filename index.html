@@ -212,11 +212,11 @@ function backplot(){
         {   zoom=zoom+5;
 
             camera.position.z = zoom;
-            camera.up.set(0, 1, 1);
+            camera.up.set(0, 1, 0);
             console.log("viewtype:", viewtype);
         }
         else if (viewtype=2)
-        {   
+        {
             zoom=zoom-5;
             camera.position.x = 0;
             camera.position.z = 0;
