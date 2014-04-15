@@ -85,6 +85,8 @@ G0 X1.0
 
     var WIDTH = 600;
     var HEIGHT = 400;
+    var viewSize = HEIGHT;
+    var aspectRatio = WIDTH/HEIGHT;
     var mouse = new THREE.Vector2(), INTERSECTED;
     projector = new THREE.Projector();
     raycaster = new THREE.Raycaster();
@@ -92,7 +94,6 @@ G0 X1.0
     var renderer = new THREE.WebGLRenderer({antialias: true});
     var zoom = 25;
     var camera = new THREE.PerspectiveCamera(zoom, WIDTH / HEIGHT, 0.1, 20000);
-//var camera = new THREE.OrthographicCamera( WIDTH/ - 2, WIDTH/ 2, HEIGHT/ 2, HEIGHT/ - 2, 0.1, 20000 );
     var scene = new THREE.Scene();
     camera.useQuaternion == true
     camera.position.x = 200;
@@ -174,12 +175,12 @@ function backplot(){
     function flatView()
     {
         var viewtype=1;
-
+        var campos = 300;
         camera.position.x = 0;
         camera.position.y = 0;
-        camera.position.z = 300;
+        camera.position.z = campos;
         camera.up.set(0, 1, 0);
-        zoom=15;
+        //zoom=15;
     }
 </script>
 
@@ -187,53 +188,52 @@ function backplot(){
     function latheView()
     {
         var viewtype=2;
+        var campos = 300;
         camera.position.x = 0;
-        camera.position.y = 300;
+        camera.position.y = campos;
         camera.position.z = 0;
         camera.up.set(1, 0, 0);
-        zoom=15;
+        //zoom=15;
     }
 </script>
 <script>
     function ISOView()
     {
         var viewtype=3;
-        camera.position.x = 200;
-        camera.position.y = -200;
-        camera.position.z = 200;
+        var campos = 200;
+        camera.position.x = campos;
+        camera.position.y = -campos ;
+        camera.position.z = campos;
         camera.up.set(0, 0, 1);
-        zoom=15;
+        //zoom=15;
     }
 </script>
 <script>
     function ZoomOut()
     {
         if (viewtype=1)
-        {   zoom=zoom+5;
+        {   campos=campos+50;
 
-            camera.position.z = zoom;
+            camera.position.z = campos;
             camera.up.set(0, 1, 0);
             console.log("viewtype:", viewtype);
         }
         else if (viewtype=2)
-        {
-            zoom=zoom-5;
+        {   campos=campos+50;
             camera.position.x = 0;
             camera.position.z = 0;
-
-            camera.position.y = zoom;
+            camera.position.y = campos;
             camera.up.set(1, 0, 0);
-console.log("viewtype:", viewtype);
+            console.log("viewtype:", viewtype);
 
         }
         else if(viewtype=3)
-        {   zoom=zoom+5;
-
-            camera.position.x = zoom;
-            camera.position.y = -zoom;
-            camera.position.z = zoom;
+        {   campos=campos+50;
+            camera.position.x = campos;
+            camera.position.y = -campos;
+            camera.position.z = campos;
             camera.up.set(0, 0, 1);
-console.log("viewtype:", viewtype);
+            console.log("viewtype:", viewtype);
 
 
         }
